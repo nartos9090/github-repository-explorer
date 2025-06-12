@@ -3,6 +3,8 @@ import { Card } from "../components/ui/card";
 import { useGithubUser } from "./provider";
 import type { GithubUser } from "../resources/users";
 import RepositoryList from "./RepositoryList";
+import { Button } from "../components/ui/button";
+import { IconSend } from "@tabler/icons-react";
 
 export default function UserList() {
   // resource
@@ -90,6 +92,13 @@ export default function UserList() {
               <p className="text-lg font-medium text-gray-700">
                 {user.login}
               </p>
+
+              <a href={user.html_url} target="_blank" className="decoration-none ms-auto" onClick={(e) => e.stopPropagation()}>
+                <Button className="" size="sm">
+                  Visit Profile
+                  <IconSend />
+                </Button>
+              </a>
             </Card>
 
             <RepositoryList githubUserData={user} />
