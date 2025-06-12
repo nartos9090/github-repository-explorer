@@ -4,6 +4,7 @@ import { Input } from "../components/ui/input";
 import { getGithubUsers } from "../resources/users";
 import { useGithubUser } from "./provider";
 import { z } from "zod";
+import { toast } from "sonner";
 
 const FormSchema = z.object({
   search: z.string().min(1, "Fill the username field"),
@@ -36,8 +37,9 @@ export default function SearchForm({ className, ...props }: HTMLAttributes<HTMLD
       githubUser.setUsers(data.items);
       githubUser.setSelectedUser(null);
     } catch (error) {
-      console.error("Error fetching users:", error);
-      // Handle error appropriately, e.g., show a notification
+      toast.error("Error fetching users", {
+        description: "Please try again later.",
+      });
     } finally {
       setIsLoading(false);
       requestAnimationFrame(() => {

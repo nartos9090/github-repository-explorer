@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type HTMLAttributes } from "react";
 import type { GithubUser } from "../resources/users";
-import { cn } from "../lib/utils";
+import { cn } from "../libs/cn/utils";
 import { useGithubUser } from "./provider";
 import { getGithubUserRepositories, type GithubUserRepository } from "../resources/repositories";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/card";
 import { IconGitBranch, IconLink, IconLoader2, IconStar } from "@tabler/icons-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
+import { toast } from "sonner";
 
 const PER_PAGE = 10;
 
@@ -75,8 +76,9 @@ export default function RepositoryList({ githubUserData, className, ...props }: 
       }
     } catch (error) {
       setIsLoading(false);
-      console.error("Error fetching repositories:", error);
-      // Handle error appropriately, e.g., show a notification
+      toast.error("Failed to fetch repositories", {
+        description: "Please try again later.",
+      });
     }
   }
 
