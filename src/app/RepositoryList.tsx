@@ -162,21 +162,23 @@ export default function RepositoryList({ githubUserData, className, ...props }: 
               animationDuration: "400ms",
             }}
           >
-            <CardHeader className="p-0">
-              <div className="flex items-center gap-2 justify-between">
-                <div className="flex gap-1.5">
-                  <h3 className="text-lg font-semibold">{repository.name}</h3>
+            <CardHeader className="p-0 block">
+              <div className="flex flex-nowrap justify-start gap-1.5">
+                <div className="flex gap-1.5 flex-nowrap">
+                  <h3 className="text-lg font-semibold shrink grow">
+                    <span className="truncate text-wrap">{repository.name}</span>
+                  </h3>
                   {repository.language && (
-                    <h6 className="font-medium  bg-blue-300 rounded-full px-2 text-sm text-blue-800 items-center flex select-none">
+                    <h6 className="font-medium bg-blue-300 rounded-full px-2 text-sm text-blue-800 items-center flex select-none h-7">
                       {repository.language || "Unknown"}
                     </h6>
                   )}
                 </div>
 
-                <div className="flex gap-2.5">
+                <div className="flex gap-2.5 items-start">
                   {repository.forks_count > 0 && (
                     <Tooltip>
-                      <TooltipTrigger>
+                      <TooltipTrigger asChild>
                         <span className="flex items-center text-md font-bold text-yellow-700">
                           <IconGitBranch className="size-5" />
                           {repository.forks_count}
@@ -189,7 +191,7 @@ export default function RepositoryList({ githubUserData, className, ...props }: 
                   )}
                   {repository.stargazers_count > 0 && (
                     <Tooltip>
-                      <TooltipTrigger>
+                      <TooltipTrigger asChild>
                         <span className="flex items-center text-md font-bold text-yellow-700">
                           <IconStar className="size-5" />
                           {repository.stargazers_count}
